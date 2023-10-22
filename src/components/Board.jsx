@@ -11,18 +11,20 @@ const Board = ({ xIsNext, squares, onPlay }) => {
     if (squares[i] || calculateWinner(squares).winner) {
       return;
     }
+    const row = location.row + 1;
+    const col = location.col + 1;
     const nextSquares = squares.slice();
     if (xIsNext) {
       nextSquares[i] = 'X';
     } else {
       nextSquares[i] = 'O';
     }
-    onPlay(nextSquares, location);
+    onPlay(nextSquares, {row, col});
   }
   const board = [];
-  for (let row=1; row<4; row++) {
+  for (let row=0; row<3; row++) {
     const board_row = [];
-    for (let col=1 ; col<4; col++) {
+    for (let col=0; col<3; col++) {
       const squareIndex = row * 3 + col;
       const isWinningSquare = winner.line.includes(squareIndex);
       board_row.push(
